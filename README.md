@@ -1,9 +1,9 @@
 # ggu
 
 ## Abstract
-This is a binding for GLUT. It works on linux.
+These are GLUT bindings for programming language Go. It works on linux.
 
-## Available Functions
+## Coverage
 * <nothing>
 
 ## Installation
