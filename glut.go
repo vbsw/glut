@@ -58,6 +58,36 @@ const (
 	CURSOR_INHERIT = C.GLUT_CURSOR_INHERIT
 )
 
+const (
+	KEY_F1 = C.GLUT_KEY_F1
+	KEY_F2 = C.GLUT_KEY_F2
+	KEY_F3 = C.GLUT_KEY_F3
+	KEY_F4 = C.GLUT_KEY_F4
+	KEY_F5 = C.GLUT_KEY_F5
+	KEY_F6 = C.GLUT_KEY_F6
+	KEY_F7 = C.GLUT_KEY_F7
+	KEY_F8 = C.GLUT_KEY_F8
+	KEY_F9 = C.GLUT_KEY_F9
+	KEY_F10 = C.GLUT_KEY_F10
+	KEY_F11 = C.GLUT_KEY_F11
+	KEY_F12 = C.GLUT_KEY_F12
+	KEY_LEFT = C.GLUT_KEY_LEFT
+	KEY_UP = C.GLUT_KEY_UP
+	KEY_RIGHT = C.GLUT_KEY_RIGHT
+	KEY_DOWN = C.GLUT_KEY_DOWN
+	KEY_PAGE_UP = C.GLUT_KEY_PAGE_UP
+	KEY_PAGE_DOWN = C.GLUT_KEY_PAGE_DOWN
+	KEY_HOME = C.GLUT_KEY_HOME
+	KEY_END = C.GLUT_KEY_END
+	KEY_INSERT = C.GLUT_KEY_INSERT
+)
+
+const (
+	ACTIVE_SHIFT = C.GLUT_ACTIVE_SHIFT
+	ACTIVE_CTRL = C.GLUT_ACTIVE_CTRL
+	ACTIVE_ALT = C.GLUT_ACTIVE_ALT
+)
+
 type tWindowCallbacks struct {
 	display func()
 	reshape func(width, height int)
@@ -234,6 +264,10 @@ func KeyboardFunc(keyboard func(key uint8, x, y int)) {
 	} else {
 		C.unregister_keyboard()
 	}
+}
+
+func GetModifiers() int {
+	return int(C.glutGetModifiers())
 }
 
 
