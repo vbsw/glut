@@ -18,51 +18,52 @@ _Note: You need the programming language Go and git to run these commands._
 Programming language Go is used.
 
 ## Coverage
-Initialization (100%)
-* void glutInit(int *argcp, char **argv)
-* void glutInitWindowSize(int width, int height)
-* void glutInitWindowPosition(int x, int y)
-* void glutInitDisplayMode(unsigned int mode)
 
-Event Processing (100%)
-* void glutMainLoop(void)
+	Initialization (100%)
+	  void glutInit(int *argcp, char **argv)
+	  void glutInitWindowSize(int width, int height)
+	  void glutInitWindowPosition(int x, int y)
+	  void glutInitDisplayMode(unsigned int mode)
 
-Window Management (100%)
-* int glutCreateWindow(char *name)
-* int glutCreateSubWindow(int win, int x, int y, int width, int height)
-* void glutSetWindow(int win);
-* int glutGetWindow(void);
-* void glutDestroyWindow(int win)
-* void glutPostRedisplay(void)
-* void glutSwapBuffers(void)
-* void glutPositionWindow(int x, int y)
-* void glutReshapeWindow(int width, int height)
-* void glutFullScreen(void)
-* void glutPopWindow(void)
-* void glutPushWindow(void)
-* void glutShowWindow(void)
-* void glutHideWindow(void)
-* void glutIconifyWindow(void)
-* void glutSetWindowTitle(char *name)
-* void glutSetIconTitle(char *name)
-* void glutSetCursor(int cursor)
+	Event Processing (100%)
+	  void glutMainLoop(void)
 
-Overlay Management (0%)
+	Window Management (100%)
+	  int glutCreateWindow(char *name)
+	  int glutCreateSubWindow(int win, int x, int y, int width, int height)
+	  void glutSetWindow(int win);
+	  int glutGetWindow(void);
+	  void glutDestroyWindow(int win)
+	  void glutPostRedisplay(void)
+	  void glutSwapBuffers(void)
+	  void glutPositionWindow(int x, int y)
+	  void glutReshapeWindow(int width, int height)
+	  void glutFullScreen(void)
+	  void glutPopWindow(void)
+	  void glutPushWindow(void)
+	  void glutShowWindow(void)
+	  void glutHideWindow(void)
+	  void glutIconifyWindow(void)
+	  void glutSetWindowTitle(char *name)
+	  void glutSetIconTitle(char *name)
+	  void glutSetCursor(int cursor)
 
-Menu Management (0%)
+	Overlay Management (0%)
 
-Callback Registration (15%)
-* void glutDisplayFunc(void (*func)(void))
-* void glutReshapeFunc(void (*func)(int width, int height))
-* void glutKeyboardFunc(void (*func)(unsigned char key, int x, int y))
+	Menu Management (0%)
 
-Colormap Management (0%)
+	Callback Registration (15%)
+	  void glutDisplayFunc(void (*func)(void))
+	  void glutReshapeFunc(void (*func)(int width, int height))
+	  void glutKeyboardFunc(void (*func)(unsigned char key, int x, int y))
 
-State Retrieval (0%)
+	Colormap Management (0%)
 
-Font Rendering (0%)
+	State Retrieval (0%)
 
-Geometric Object Rendering (0%)
+	Font Rendering (0%)
+
+	Geometric Object Rendering (0%)
 
 ## Example
 	package main
