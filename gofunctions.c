@@ -48,6 +48,12 @@ void register_motion() {
 void register_passiveMotion() {
 	glutPassiveMotionFunc(&goPassiveMotion);
 }
+void register_timer(unsigned int msecs, int timerId) {
+	glutTimerFunc(msecs, &goTimer, timerId);
+}
+void register_idle() {
+	glutIdleFunc(&goIdle);
+}
 
 
 // unregister callbacks
@@ -69,6 +75,9 @@ void unregister_motion() {
 }
 void unregister_passiveMotion() {
 	glutPassiveMotionFunc(NULL);
+}
+void unregister_idle() {
+	glutIdleFunc(NULL);
 }
 
 

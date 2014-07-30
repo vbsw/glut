@@ -12,6 +12,8 @@ void register_keyboard();
 void register_mouse();
 void register_motion();
 void register_passiveMotion();
+void register_timer(unsigned int msecs, int timerId);
+void register_idle();
 
 void unregister_display();
 void unregister_reshape();
@@ -19,6 +21,7 @@ void unregister_keyboard();
 void unregister_mouse();
 void unregister_motion();
 void unregister_passiveMotion();
+void unregister_idle();
 
 #endif /* GOFUNCTIONS_H */
 

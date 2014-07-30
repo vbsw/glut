@@ -152,16 +152,17 @@ type tWindowCallbacks struct {
 	tabletMotion func(x, y int)
 	tabletButton func(button, state, x, y int)
 	menuStatus func(status, x, y int)
-	idle func()
 	windowStatus func(state int)
 	keyboardUp func(key uint8, x, y int)
 	specialUp func(key, x, y int)
 	joystick func(buttonMask uint, x, y, z int)
+	idle func()
 }
 
 
 var (
 	windowCallbacks = make(map[int]*tWindowCallbacks)
+	timers = make(map[int]func(timerId int))
 )
 
 func Init() {
@@ -341,6 +342,22 @@ func PassiveMotionFunc(passiveMotion func(x, y int)) {
 	}
 }
 
+// Timer should not be nil.
+func TimerFunc(msecs int, timer func(timerId int), timerId int) {
+	timers[timerId] = timer
+	C.register_timer(C.uint(msecs), C.int(timerId))
+}
+
+func IdleFunc(idle func()) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].idle = idle
+	if idle != nil {
+		C.register_idle()
+	} else {
+		C.unregister_idle()
+	}
+}
+
 func GetModifiers() int {
 	return int(C.glutGetModifiers())
 }
@@ -380,6 +397,20 @@ func goMotion(x, y C.int) {
 func goPassiveMotion(x, y C.int) {
 	windowId := int(C.glutGetWindow())
 	windowCallbacks[windowId].passiveMotion(int(x), int(y))
+}
+
+//export goTimer
+func goTimer(timerId C.int) {
+	goTimerId := int(timerId)
+	timer := timers[goTimerId]
+	delete(timers, goTimerId)
+	timer(goTimerId)
+}
+
+//export goIdle
+func goIdle() {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].idle()
 }
 
 
