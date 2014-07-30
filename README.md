@@ -1,10 +1,7 @@
 # ggu
 
 ## Abstract
-These are GLUT bindings for programming language Go. It works on linux.
-
-## Coverage
-* <nothing>
+This is a binding from the programming language Go to GLUT. It works on linux.
 
 ## Installation
 
@@ -19,6 +16,16 @@ _Note: You need the programming language Go and git to run these commands._
 
 ## Development
 Programming language Go is used.
+
+## Coverage
+* void glutInit(int *argcp, char **argv)
+* void glutInitWindowSize(int width, int height)
+* void glutInitWindowPosition(int x, int y)
+* void glutInitDisplayMode(unsigned int mode)
+* void glutMainLoop(void)
+* int glutCreateWindow(char *name)
+* void glutDisplayFunc(void (*func)(void))
+* void glutReshapeFunc(void (*func)(int width, int height))
 
 ## Copyright
 Copyright 2014 Vitali Baumtrok
