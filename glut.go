@@ -32,6 +32,32 @@ const (
 	LUMINANCE = C.GLUT_LUMINANCE
 )
 
+const (
+	CURSOR_RIGHT_ARROW = C.GLUT_CURSOR_RIGHT_ARROW
+	CURSOR_LEFT_ARROW = C.GLUT_CURSOR_LEFT_ARROW
+	CURSOR_INFO = C.GLUT_CURSOR_INFO
+	CURSOR_DESTROY = C.GLUT_CURSOR_DESTROY
+	CURSOR_HELP = C.GLUT_CURSOR_HELP
+	CURSOR_CYCLE = C.GLUT_CURSOR_CYCLE
+	CURSOR_SPRAY = C.GLUT_CURSOR_SPRAY
+	CURSOR_WAIT = C.GLUT_CURSOR_WAIT
+	CURSOR_TEXT = C.GLUT_CURSOR_TEXT
+	CURSOR_CROSSHAIR = C.GLUT_CURSOR_CROSSHAIR
+	CURSOR_UP_DOWN = C.GLUT_CURSOR_UP_DOWN
+	CURSOR_LEFT_RIGHT = C.GLUT_CURSOR_LEFT_RIGHT
+	CURSOR_TOP_SIDE = C.GLUT_CURSOR_TOP_SIDE
+	CURSOR_BOTTOM_SIDE = C.GLUT_CURSOR_BOTTOM_SIDE
+	CURSOR_LEFT_SIDE = C.GLUT_CURSOR_LEFT_SIDE
+	CURSOR_RIGHT_SIDE = C.GLUT_CURSOR_RIGHT_SIDE
+	CURSOR_TOP_LEFT_CORNER = C.GLUT_CURSOR_TOP_LEFT_CORNER
+	CURSOR_TOP_RIGHT_CORNER = C.GLUT_CURSOR_TOP_RIGHT_CORNER
+	CURSOR_BOTTOM_RIGHT_CORNER = C.GLUT_CURSOR_BOTTOM_RIGHT_CORNER
+	CURSOR_BOTTOM_LEFT_CORNER = C.GLUT_CURSOR_BOTTOM_LEFT_CORNER
+	CURSOR_FULL_CROSSHAIR = C.GLUT_CURSOR_FULL_CROSSHAIR
+	CURSOR_NONE = C.GLUT_CURSOR_NONE
+	CURSOR_INHERIT = C.GLUT_CURSOR_INHERIT
+)
+
 type tWindowCallbacks struct {
 	display func()
 	reshape func(width, height int)
@@ -104,9 +130,80 @@ func CreateWindow(title string) (windowId int) {
 	return windowId
 }
 
+func CreateSubWindow(windowId, x, y, width, height int) (subWindowId int) {
+	subWindowId = int(C.glutCreateSubWindow(C.int(windowId), C.int(x), C.int(y), C.int(width), C.int(height)))
+	windowCallbacks[subWindowId] = new(tWindowCallbacks)
+	return subWindowId
+}
+
+func SetWindow(windowId int) {
+	C.glutSetWindow(C.int(windowId))
+}
+
+func GetWindow() (windowId int) {
+	windowId = int(C.glutGetWindow())
+	return windowId
+}
+
 func DestroyWindow(windowId int) {
 	C.glutDestroyWindow(C.int(windowId))
 	delete(windowCallbacks, windowId)
+}
+
+func PostRedisplay() {
+	C.glutPostRedisplay()
+}
+
+func SwapBuffers() {
+	C.glutSwapBuffers()
+}
+
+func PositionWindow(x, y int) {
+	C.glutPositionWindow(C.int(x), C.int(y))
+}
+
+func ReshapeWindow(width, height int) {
+	C.glutReshapeWindow(C.int(width), C.int(height))
+}
+
+func FullScreen() {
+	C.glutFullScreen()
+}
+
+func PopWindow() {
+	C.glutPopWindow()
+}
+
+func PushWindow() {
+	C.glutPushWindow()
+}
+
+func ShowWindow() {
+	C.glutShowWindow()
+}
+
+func HideWindow() {
+	C.glutHideWindow()
+}
+
+func IconifyWindow() {
+	C.glutIconifyWindow()
+}
+
+func SetWindowTitle(title string) {
+	ctitle := C.CString(title)
+	defer C.free(unsafe.Pointer(ctitle))
+	C.glutSetWindowTitle(ctitle)
+}
+
+func SetIconTitle(title string) {
+	ctitle := C.CString(title)
+	defer C.free(unsafe.Pointer(ctitle))
+	C.glutSetIconTitle(ctitle)
+}
+
+func SetCursor(cursor int) {
+	C.glutSetCursor(C.int(cursor))
 }
 
 func DisplayFunc(display func()) {
