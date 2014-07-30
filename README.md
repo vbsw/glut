@@ -23,8 +23,10 @@ Initialization (100%)
 * void glutInitWindowSize(int width, int height)
 * void glutInitWindowPosition(int x, int y)
 * void glutInitDisplayMode(unsigned int mode)
+
 Event Processing (100%)
 * void glutMainLoop(void)
+
 Window Management (100%)
 * int glutCreateWindow(char *name)
 * int glutCreateSubWindow(int win, int x, int y, int width, int height)
@@ -44,15 +46,22 @@ Window Management (100%)
 * void glutSetWindowTitle(char *name)
 * void glutSetIconTitle(char *name)
 * void glutSetCursor(int cursor)
+
 Overlay Management (0%)
+
 Menu Management (0%)
+
 Callback Registration (15%)
 * void glutDisplayFunc(void (*func)(void))
 * void glutReshapeFunc(void (*func)(int width, int height))
 * void glutKeyboardFunc(void (*func)(unsigned char key, int x, int y))
+
 Colormap Management (0%)
+
 State Retrieval (0%)
+
 Font Rendering (0%)
+
 Geometric Object Rendering (0%)
 
 ## Example
