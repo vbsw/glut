@@ -1,7 +1,7 @@
 # glut
 
 ## Abstract
-GLUT binding for the programming language Go. It works on linux.
+This is GLUT binding for the programming language Go. It works on linux.
 
 ## Installation
 
