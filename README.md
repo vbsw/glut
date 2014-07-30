@@ -96,7 +96,7 @@ Programming language Go is used.
 	}
 
 	func keyboard(key uint8, x, y int) {
-		if key==27 {
+		if key==27 { // escape
 			glut.DestroyWindow(glut.GetWindow())
 		} else {
 			if (glut.GetModifiers() & glut.ACTIVE_CTRL) > 0 {
