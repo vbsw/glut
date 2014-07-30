@@ -8,9 +8,11 @@
 
 void register_reshape();
 void register_display();
+void register_keyboard();
 
 void unregister_reshape();
 void unregister_display();
+void unregister_keyboard();
 
 #endif /* GOFUNCTIONS_H */
 

@@ -62,7 +62,7 @@ type tWindowCallbacks struct {
 	display func()
 	reshape func(width, height int)
 	overlayDisplay func()
-	keyboard func(key byte, x, y int)
+	keyboard func(key uint8, x, y int)
 	mouse func(button, state, x, y int)
 	motion func(x, y int)
 	passiveMotion func(x, y int)
@@ -79,7 +79,7 @@ type tWindowCallbacks struct {
 	menuStatus func(status, x, y int)
 	idle func()
 	windowStatus func(state int)
-	keyboardUp func(key byte, x, y int)
+	keyboardUp func(key uint8, x, y int)
 	specialUp func(key, x, y int)
 	joystick func(buttonMask uint, x, y, z int)
 }
@@ -226,6 +226,16 @@ func ReshapeFunc(reshape func(width, height int)) {
 	}
 }
 
+func KeyboardFunc(keyboard func(key uint8, x, y int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].keyboard = keyboard
+	if keyboard != nil {
+		C.register_keyboard()
+	} else {
+		C.unregister_keyboard()
+	}
+}
+
 
 //export goReshape
 func goReshape(width, height C.int) {
@@ -237,6 +247,12 @@ func goReshape(width, height C.int) {
 func goDisplay() {
 	windowId := int(C.glutGetWindow())
 	windowCallbacks[windowId].display()
+}
+
+//export goKeyboard
+func goKeyboard(key C.uchar, x, y C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].keyboard(uint8(key), int(x), int(y))
 }
 
 

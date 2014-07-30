@@ -31,6 +31,9 @@ void register_reshape() {
 void register_display() {
 	glutDisplayFunc(&goDisplay);
 }
+void register_keyboard() {
+	glutKeyboardFunc(&goKeyboard);
+}
 
 
 // unregister callbacks
@@ -40,6 +43,9 @@ void unregister_reshape() {
 }
 void unregister_display() {
 	glutDisplayFunc(NULL);
+}
+void unregister_keyboard() {
+	glutKeyboardFunc(NULL);
 }
 
 
