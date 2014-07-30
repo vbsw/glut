@@ -24,6 +24,7 @@ Programming language Go is used.
 * void glutInitDisplayMode(unsigned int mode)
 * void glutMainLoop(void)
 * int glutCreateWindow(char *name)
+* void glutDestroyWindow(int win)
 * void glutDisplayFunc(void (*func)(void))
 * void glutReshapeFunc(void (*func)(int width, int height))
 
