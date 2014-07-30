@@ -1,7 +1,7 @@
-# ggu
+# glut
 
 ## Abstract
-This is a binding from the programming language Go to GLUT. It works on linux.
+GLUT binding for the programming language Go. It works on linux.
 
 ## Installation
 
