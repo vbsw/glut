@@ -59,7 +59,8 @@ Programming language Go is used.
 
 	Colormap Management (0%)
 
-	State Retrieval (0%)
+	State Retrieval (20%)
+	  int glutGetModifiers(void)
 
 	Font Rendering (0%)
 
@@ -92,10 +93,14 @@ Programming language Go is used.
 	}
 
 	func keyboard(key uint8, x, y int) {
-		if key==27 { // escape
+		if key==27 {
 			glut.DestroyWindow(glut.GetWindow())
 		} else {
-			println("key pressed:", key)
+			if (glut.GetModifiers() & glut.ACTIVE_CTRL) > 0 {
+				println("key pressed: ctrl +", key)
+			} else {
+				println("key pressed:", key)
+			}
 		}
 	}
 
