@@ -6,13 +6,19 @@
 #ifndef GOFUNCTIONS_H
 #define GOFUNCTIONS_H
 
-void register_reshape();
 void register_display();
+void register_reshape();
 void register_keyboard();
+void register_mouse();
+void register_motion();
+void register_passiveMotion();
 
-void unregister_reshape();
 void unregister_display();
+void unregister_reshape();
 void unregister_keyboard();
+void unregister_mouse();
+void unregister_motion();
+void unregister_passiveMotion();
 
 #endif /* GOFUNCTIONS_H */
 

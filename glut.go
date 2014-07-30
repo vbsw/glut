@@ -90,8 +90,8 @@ const (
 
 type tWindowCallbacks struct {
 	display func()
-	reshape func(width, height int)
 	overlayDisplay func()
+	reshape func(width, height int)
 	keyboard func(key uint8, x, y int)
 	mouse func(button, state, x, y int)
 	motion func(x, y int)
@@ -266,6 +266,36 @@ func KeyboardFunc(keyboard func(key uint8, x, y int)) {
 	}
 }
 
+func MouseFunc(mouse func(button, state, x, y int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].mouse = mouse
+	if mouse != nil {
+		C.register_mouse()
+	} else {
+		C.unregister_mouse()
+	}
+}
+
+func MotionFunc(motion func(x, y int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].motion = motion
+	if motion != nil {
+		C.register_motion()
+	} else {
+		C.unregister_motion()
+	}
+}
+
+func PassiveMotionFunc(passiveMotion func(x, y int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].passiveMotion = passiveMotion
+	if passiveMotion != nil {
+		C.register_passiveMotion()
+	} else {
+		C.unregister_passiveMotion()
+	}
+}
+
 func GetModifiers() int {
 	return int(C.glutGetModifiers())
 }
@@ -287,6 +317,24 @@ func goDisplay() {
 func goKeyboard(key C.uchar, x, y C.int) {
 	windowId := int(C.glutGetWindow())
 	windowCallbacks[windowId].keyboard(uint8(key), int(x), int(y))
+}
+
+//export goMouse
+func goMouse(button, state, x, y C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].mouse(int(button), int(state), int(x), int(y))
+}
+
+//export goMotion
+func goMotion(x, y C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].motion(int(x), int(y))
+}
+
+//export goPassiveMotion
+func goPassiveMotion(x, y C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].passiveMotion(int(x), int(y))
 }
 
 

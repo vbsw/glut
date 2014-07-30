@@ -13,8 +13,13 @@
 #include "_cgo_export.h"
 
 // Exported functions from Go are:
-// goReshape
 // goDisplay
+// goReshape
+// goKeyboard
+// goMouse
+// goMotion
+// goPassiveMotion
+
 
 #if defined(__APPLE__)
 	#include <GLUT/glut.h>
@@ -25,27 +30,45 @@
 
 // register callbacks
 
-void register_reshape() {
-	glutReshapeFunc(&goReshape);
-}
 void register_display() {
 	glutDisplayFunc(&goDisplay);
 }
+void register_reshape() {
+	glutReshapeFunc(&goReshape);
+}
 void register_keyboard() {
 	glutKeyboardFunc(&goKeyboard);
+}
+void register_mouse() {
+	glutMouseFunc(&goMouse);
+}
+void register_motion() {
+	glutMotionFunc(&goMotion);
+}
+void register_passiveMotion() {
+	glutPassiveMotionFunc(&goPassiveMotion);
 }
 
 
 // unregister callbacks
 
-void unregister_reshape() {
-	glutReshapeFunc(NULL);
-}
 void unregister_display() {
 	glutDisplayFunc(NULL);
 }
+void unregister_reshape() {
+	glutReshapeFunc(NULL);
+}
 void unregister_keyboard() {
 	glutKeyboardFunc(NULL);
+}
+void unregister_mouse() {
+	glutMouseFunc(NULL);
+}
+void unregister_motion() {
+	glutMotionFunc(NULL);
+}
+void unregister_passiveMotion() {
+	glutPassiveMotionFunc(NULL);
 }
 
 
