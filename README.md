@@ -18,11 +18,14 @@ _Note: You need the programming language Go and git to run these commands._
 Programming language Go is used.
 
 ## Coverage
+Initialization (100%)
 * void glutInit(int *argcp, char **argv)
 * void glutInitWindowSize(int width, int height)
 * void glutInitWindowPosition(int x, int y)
 * void glutInitDisplayMode(unsigned int mode)
+Event Processing (100%)
 * void glutMainLoop(void)
+Window Management (100%)
 * int glutCreateWindow(char *name)
 * int glutCreateSubWindow(int win, int x, int y, int width, int height)
 * void glutSetWindow(int win);
@@ -41,8 +44,16 @@ Programming language Go is used.
 * void glutSetWindowTitle(char *name)
 * void glutSetIconTitle(char *name)
 * void glutSetCursor(int cursor)
+Overlay Management (0%)
+Menu Management (0%)
+Callback Registration (15%)
 * void glutDisplayFunc(void (*func)(void))
 * void glutReshapeFunc(void (*func)(int width, int height))
+* void glutKeyboardFunc(void (*func)(unsigned char key, int x, int y))
+Colormap Management (0%)
+State Retrieval (0%)
+Font Rendering (0%)
+Geometric Object Rendering (0%)
 
 ## Example
 	package main
@@ -55,9 +66,10 @@ Programming language Go is used.
 		glut.Init()
 		glut.InitDisplayMode(glut.SINGLE | glut.RGBA)
 		glut.InitWindowSize(640, 480)
-		glut.CreateWindow("Testing GLUT binding for Go");
+		glut.CreateWindow("Test GLUT binding for Go");
 		glut.ReshapeFunc(reshape)
 		glut.DisplayFunc(display)
+		glut.KeyboardFunc(keyboard)
 		glut.MainLoop()
 	}
 
@@ -67,6 +79,14 @@ Programming language Go is used.
 
 	func display() {
 		println("display")
+	}
+
+	func keyboard(key uint8, x, y int) {
+		if key==27 { // escape
+			glut.DestroyWindow(glut.GetWindow())
+		} else {
+			println("key pressed:", key)
+		}
 	}
 
 ## Copyright
