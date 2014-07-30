@@ -17,6 +17,44 @@ _Note: You need the programming language Go and git to run these commands._
 ## Development
 Programming language Go is used.
 
+## Example
+	package main
+
+	import (
+		"github.com/vitalibaumtrok/glut"
+	)
+
+	func main() {
+		glut.Init()
+		glut.InitDisplayMode(glut.SINGLE | glut.RGBA)
+		glut.InitWindowSize(640, 480)
+		glut.CreateWindow("Testing GLUT binding for Go");
+		glut.ReshapeFunc(reshape)
+		glut.DisplayFunc(display)
+		glut.KeyboardFunc(keyboard)
+		glut.MainLoop()
+	}
+
+	func reshape(widht, height int) {
+		println("reshape")
+	}
+
+	func display() {
+		println("display")
+	}
+
+	func keyboard(key uint8, x, y int) {
+		if key==27 { // escape
+			glut.DestroyWindow(glut.GetWindow())
+		} else {
+			if (glut.GetModifiers() & glut.ACTIVE_CTRL) > 0 {
+				println("key pressed: ctrl +", key)
+			} else {
+				println("key pressed:", key)
+			}
+		}
+	}
+
 ## Coverage
 
 	Initialization (100%)
@@ -68,44 +106,6 @@ Programming language Go is used.
 	Font Rendering (0%)
 
 	Geometric Object Rendering (0%)
-
-## Example
-	package main
-
-	import (
-		"github.com/vitalibaumtrok/glut"
-	)
-
-	func main() {
-		glut.Init()
-		glut.InitDisplayMode(glut.SINGLE | glut.RGBA)
-		glut.InitWindowSize(640, 480)
-		glut.CreateWindow("Test GLUT binding for Go");
-		glut.ReshapeFunc(reshape)
-		glut.DisplayFunc(display)
-		glut.KeyboardFunc(keyboard)
-		glut.MainLoop()
-	}
-
-	func reshape(widht, height int) {
-		println("reshape")
-	}
-
-	func display() {
-		println("display")
-	}
-
-	func keyboard(key uint8, x, y int) {
-		if key==27 { // escape
-			glut.DestroyWindow(glut.GetWindow())
-		} else {
-			if (glut.GetModifiers() & glut.ACTIVE_CTRL) > 0 {
-				println("key pressed: ctrl +", key)
-			} else {
-				println("key pressed:", key)
-			}
-		}
-	}
 
 ## Copyright
 Copyright 2014 Vitali Baumtrok
