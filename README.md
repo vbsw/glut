@@ -35,7 +35,7 @@ Programming language Go is used.
 		glut.MainLoop()
 	}
 
-	func reshape(widht, height int) {
+	func reshape(width, height int) {
 		println("reshape")
 	}
 
