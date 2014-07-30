@@ -32,9 +32,9 @@ const (
 	LUMINANCE = C.GLUT_LUMINANCE
 )
 
-type WindowCallback struct {
-	reshape func(width, height int)
+type tWindowCallbacks struct {
 	display func()
+	reshape func(width, height int)
 	overlayDisplay func()
 	keyboard func(key byte, x, y int)
 	mouse func(button, state, x, y int)
@@ -60,7 +60,7 @@ type WindowCallback struct {
 
 
 var (
-	windowCallbacks = make(map[int]*WindowCallback)
+	windowCallbacks = make(map[int]*tWindowCallbacks)
 )
 
 func Init() {
@@ -78,12 +78,20 @@ func Init() {
 	C.glutInit(&argc, &argv[0])
 }
 
+func InitWindowSize(width, height int) {
+	C.glutInitWindowSize(C.int(width), C.int(height))
+}
+
+func InitWindowPosition(width, height int) {
+	C.glutInitWindowPosition(C.int(width), C.int(height))
+}
+
 func InitDisplayMode(mode uint) {
 	C.glutInitDisplayMode(C.uint(mode))
 }
 
-func InitWindowSize(width, height int) {
-	C.glutInitWindowSize(C.int(width), C.int(height))
+func MainLoop() {
+	C.glutMainLoop()
 }
 
 func CreateWindow(title string) (windowId int) {
@@ -91,19 +99,14 @@ func CreateWindow(title string) (windowId int) {
 	defer C.free(unsafe.Pointer(ctitle))
 
 	windowId = int(C.glutCreateWindow(ctitle))
-	windowCallbacks[windowId] = new(WindowCallback)
+	windowCallbacks[windowId] = new(tWindowCallbacks)
 
 	return windowId
 }
 
-func ReshapeFunc(reshape func(width, height int)) {
-	windowId := int(C.glutGetWindow())
-	windowCallbacks[windowId].reshape = reshape
-	if reshape != nil {
-		C.register_reshape()
-	} else {
-		C.unregister_reshape()
-	}
+func DestroyWindow(windowId int) {
+	C.glutDestroyWindow(C.int(windowId))
+	delete(windowCallbacks, windowId)
 }
 
 func DisplayFunc(display func()) {
@@ -116,8 +119,14 @@ func DisplayFunc(display func()) {
 	}
 }
 
-func MainLoop() {
-	C.glutMainLoop()
+func ReshapeFunc(reshape func(width, height int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].reshape = reshape
+	if reshape != nil {
+		C.register_reshape()
+	} else {
+		C.unregister_reshape()
+	}
 }
 
 
