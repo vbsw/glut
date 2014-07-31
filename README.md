@@ -111,6 +111,7 @@ Programming language Go is used.
 	Colormap Management (0%)
 
 	State Retrieval (20%)
+	  int glutGet(GLenum state)
 	  int glutGetModifiers(void)
 
 	Font Rendering (0%)
