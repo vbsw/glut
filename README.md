@@ -86,7 +86,14 @@ Programming language Go is used.
 	  void glutSetIconTitle(char *name)
 	  void glutSetCursor(int cursor)
 
-	Overlay Management (0%)
+	Overlay Management (100%)
+	  void glutEstablishOverlay(void)
+	  void glutUseLayer(GLenum layer)
+	  void glutRemoveOverlay(void)
+	  void glutPostOverlayRedisplay(void)
+	  void glutWindowPostOverlayRedisplay(int win)
+	  void glutShowOverlay(void)
+	  void glutHideOverlay(void)
 
 	Menu Management (0%)
 
