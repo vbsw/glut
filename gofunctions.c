@@ -20,6 +20,10 @@
 // goMouse
 // goMotion
 // goPassiveMotion
+// goVisibility
+// goEntry
+// goTimer
+// goIdle
 
 
 #if defined(__APPLE__)
@@ -52,6 +56,12 @@ void register_motion() {
 void register_passiveMotion() {
 	glutPassiveMotionFunc(&goPassiveMotion);
 }
+void register_visibility() {
+	glutVisibilityFunc(&goVisibility);
+}
+void register_entry() {
+	glutEntryFunc(&goEntry);
+}
 void register_timer(unsigned int msecs, int timerId) {
 	glutTimerFunc(msecs, &goTimer, timerId);
 }
@@ -82,6 +92,12 @@ void unregister_motion() {
 }
 void unregister_passiveMotion() {
 	glutPassiveMotionFunc(NULL);
+}
+void unregister_visibility() {
+	glutVisibilityFunc(NULL);
+}
+void unregister_entry() {
+	glutEntryFunc(NULL);
 }
 void unregister_idle() {
 	glutIdleFunc(NULL);

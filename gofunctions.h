@@ -13,6 +13,8 @@ void register_keyboard();
 void register_mouse();
 void register_motion();
 void register_passiveMotion();
+void register_visibility();
+void register_entry();
 void register_timer(unsigned int msecs, int timerId);
 void register_idle();
 
@@ -23,6 +25,8 @@ void unregister_keyboard();
 void unregister_mouse();
 void unregister_motion();
 void unregister_passiveMotion();
+void unregister_visibility();
+void unregister_entry();
 void unregister_idle();
 
 #endif /* GOFUNCTIONS_H */

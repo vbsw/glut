@@ -458,6 +458,26 @@ func PassiveMotionFunc(passiveMotion func(x, y int)) {
 	}
 }
 
+func VisibilityFunc(visibility func(state int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].visibility = visibility
+	if visibility != nil {
+		C.register_visibility()
+	} else {
+		C.unregister_visibility()
+	}
+}
+
+func EntryFunc(entry func(state int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].entry = entry
+	if entry != nil {
+		C.register_entry()
+	} else {
+		C.unregister_entry()
+	}
+}
+
 // Do not register a second timer with the same id, before the first run out.
 // timer should not be nil.
 func TimerFunc(msecs int, timer func(timerId int), timerId int) {
@@ -480,7 +500,7 @@ func SetColor(cell int, red, green, blue float32) {
 }
 
 func GetColor(cell, component int) (float32) {
-	return float32(C.glutGetColor(ccell, component))
+	return float32(C.glutGetColor(C.int(cell), C.int(component)))
 }
 
 func CopyColormap(windowId int) {
@@ -551,6 +571,18 @@ func goMotion(x, y C.int) {
 func goPassiveMotion(x, y C.int) {
 	windowId := int(C.glutGetWindow())
 	windowCallbacks[windowId].passiveMotion(int(x), int(y))
+}
+
+//export goVisibility
+func goVisibility(state C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].visibility(int(state))
+}
+
+//export goEntry
+func goEntry(state C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].entry(int(state))
 }
 
 //export goTimer
