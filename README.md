@@ -108,7 +108,10 @@ Programming language Go is used.
 	  void glutTimerFunc(unsigned int msecs, void (*func)(int value), int value)
 	  void glutIdleFunc(void (*func)(void))
 
-	Colormap Management (0%)
+	Colormap Management (100%)
+	  void glutSetColor(int cell, GLfloat red, GLfloat green, GLfloat blue)
+	  GLfloat glutGetColor(int cell, int component)
+	  void glutCopyColormap(int win)
 
 	State Retrieval (100%)
 	  int glutGet(GLenum state)
