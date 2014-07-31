@@ -97,7 +97,7 @@ Programming language Go is used.
 
 	Menu Management (0%)
 
-	Callback Registration (45%)
+	Callback Registration (55%)
 	  void glutDisplayFunc(void (*func)(void))
 	  void glutOverlayDisplayFunc(void (*func)(void))
 	  void glutReshapeFunc(void (*func)(int width, int height))
@@ -105,6 +105,8 @@ Programming language Go is used.
 	  void glutMouseFunc(void (*func)(int button, int state, int x, int y))
 	  void glutMotionFunc(void (*func)(int x, int y))
 	  void glutPassiveMotionFunc(void (*func)(int x, int y))
+	  void glutVisibilityFunc(void (*func)(int state))
+	  void glutEntryFunc(void (*func)(int state))
 	  void glutTimerFunc(unsigned int msecs, void (*func)(int value), int value)
 	  void glutIdleFunc(void (*func)(void))
 
