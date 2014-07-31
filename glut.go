@@ -181,7 +181,7 @@ const (
 	CURSOR_INHERIT = C.GLUT_CURSOR_INHERIT
 )
 
-// RGB color component specification
+// RGB color component specification for GetColor
 const (
 	RED = C.GLUT_RED
 	GREEN = C.GLUT_GREEN
@@ -473,6 +473,18 @@ func IdleFunc(idle func()) {
 	} else {
 		C.unregister_idle()
 	}
+}
+
+func SetColor(cell int, red, green, blue float32) {
+	C.glutSetColor(C.int(cell), C.GLfloat(red), C.GLfloat(green), C.GLfloat(blue))
+}
+
+func GetColor(cell, component int) (float32) {
+	return float32(C.glutGetColor(ccell, component))
+}
+
+func CopyColormap(windowId int) {
+	C.glutCopyColormap(C.int(windowId))
 }
 
 func Get(state int) int {
