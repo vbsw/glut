@@ -14,6 +14,7 @@
 
 // Exported functions from Go are:
 // goDisplay
+// goOverlayDisplay
 // goReshape
 // goKeyboard
 // goMouse
@@ -32,6 +33,9 @@
 
 void register_display() {
 	glutDisplayFunc(&goDisplay);
+}
+void register_overlayDisplay() {
+	glutOverlayDisplayFunc(&goOverlayDisplay);
 }
 void register_reshape() {
 	glutReshapeFunc(&goReshape);
@@ -60,6 +64,9 @@ void register_idle() {
 
 void unregister_display() {
 	glutDisplayFunc(NULL);
+}
+void unregister_overlayDisplay() {
+	glutOverlayDisplayFunc(NULL);
 }
 void unregister_reshape() {
 	glutReshapeFunc(NULL);

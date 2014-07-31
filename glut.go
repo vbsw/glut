@@ -292,6 +292,16 @@ func DisplayFunc(display func()) {
 	}
 }
 
+func OverlayDisplayFunc(overlayDisplay func()) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].overlayDisplay = overlayDisplay
+	if overlayDisplay != nil {
+		C.register_overlayDisplay()
+	} else {
+		C.unregister_overlayDisplay()
+	}
+}
+
 func ReshapeFunc(reshape func(width, height int)) {
 	windowId := int(C.glutGetWindow())
 	windowCallbacks[windowId].reshape = reshape
@@ -342,7 +352,8 @@ func PassiveMotionFunc(passiveMotion func(x, y int)) {
 	}
 }
 
-// Timer should not be nil.
+// Do not register a second timer with the same id, before the first run out.
+// timer should not be nil.
 func TimerFunc(msecs int, timer func(timerId int), timerId int) {
 	timers[timerId] = timer
 	C.register_timer(C.uint(msecs), C.int(timerId))
@@ -363,16 +374,22 @@ func GetModifiers() int {
 }
 
 
-//export goReshape
-func goReshape(width, height C.int) {
-	windowId := int(C.glutGetWindow())
-	windowCallbacks[windowId].reshape(int(width), int(height))
-}
-
 //export goDisplay
 func goDisplay() {
 	windowId := int(C.glutGetWindow())
 	windowCallbacks[windowId].display()
+}
+
+//export goOverlayDisplay
+func goOverlayDisplay() {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].overlayDisplay()
+}
+
+//export goReshape
+func goReshape(width, height C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].reshape(int(width), int(height))
 }
 
 //export goKeyboard

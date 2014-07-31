@@ -7,6 +7,7 @@
 #define GOFUNCTIONS_H
 
 void register_display();
+void register_overlayDisplay();
 void register_reshape();
 void register_keyboard();
 void register_mouse();
@@ -16,6 +17,7 @@ void register_timer(unsigned int msecs, int timerId);
 void register_idle();
 
 void unregister_display();
+void unregister_overlayDisplay();
 void unregister_reshape();
 void unregister_keyboard();
 void unregister_mouse();
