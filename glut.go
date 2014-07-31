@@ -70,6 +70,12 @@ const (
 	LUMINANCE = C.GLUT_LUMINANCE
 )
 
+// the glutUseLayer parameters
+const (
+	NORMAL = C.GLUT_NORMAL
+	OVERLAY = C.GLUT_OVERLAY
+)
+
 // the glutGetModifiers parameters
 const (
 	ACTIVE_SHIFT = C.GLUT_ACTIVE_SHIFT
@@ -280,6 +286,35 @@ func SetIconTitle(title string) {
 
 func SetCursor(cursor int) {
 	C.glutSetCursor(C.int(cursor))
+}
+
+func EstablishOverlay() {
+	C.glutEstablishOverlay()
+}
+
+// Use glut.NORMAL or glut.OVERLAY as layer.
+func UseLayer(layer int) {
+	C.glutUseLayer(C.GLenum(layer))
+}
+
+func RemoveOverlay() {
+	C.glutRemoveOverlay()
+}
+
+func PostOverlayRedisplay() {
+	C.glutPostOverlayRedisplay()
+}
+
+func PostWindowOverlayRedisplay(windowId int) {
+	C.glutPostWindowOverlayRedisplay(C.int(windowId))
+}
+
+func ShowOverlay() {
+	C.glutShowOverlay()
+}
+
+func HideOverlay() {
+	C.glutHideOverlay()
 }
 
 func DisplayFunc(display func()) {
