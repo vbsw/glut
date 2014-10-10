@@ -130,4 +130,5 @@ Programming language Go is used.
 Copyright 2014 Vitali Baumtrok
 
 This program is distributed under the terms of the Boost Software License,
-Version 1.0, as published on <http://www.boost.org/LICENSE_1_0.txt>.
+Version 1.0. (See accompanying file LICENSE_1_0.txt or copy
+at http://www.boost.org/LICENSE_1_0.txt)
