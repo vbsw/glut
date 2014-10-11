@@ -1,7 +1,7 @@
 # glut
 
 ## Abstract
-This is GLUT binding for the programming language Go. It works on linux.
+This is freeglut binding for the programming language Go. It works on linux.
 
 ## Installation
 
@@ -97,7 +97,7 @@ Programming language Go is used.
 
 	Menu Management (0%)
 
-	Callback Registration (55%)
+	Callback Registration (48%)
 	  void glutDisplayFunc(void (*func)(void))
 	  void glutOverlayDisplayFunc(void (*func)(void))
 	  void glutReshapeFunc(void (*func)(int width, int height))
