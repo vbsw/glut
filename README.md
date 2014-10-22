@@ -3,7 +3,7 @@
 ## Abstract
 This is glut binding for the programming language Go. It works on linux.
 
-If you want to use the functions of freeglut download <github.com/vitalibaumtrok/freeglut>.
+If you want the functions of freeglut download github.com/vitalibaumtrok/freeglut.
 
 ## Installation
 
