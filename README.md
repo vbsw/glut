@@ -1,7 +1,9 @@
 # glut
 
 ## Abstract
-This is freeglut binding for the programming language Go. It works on linux.
+This is glut binding for the programming language Go. It works on linux.
+
+If you want to use the functions of freeglut download <github.com/vitalibaumtrok/freeglut>.
 
 ## Installation
 
@@ -18,8 +20,6 @@ _Note: You need the programming language Go and git to run these commands._
 Programming language Go is used.
 
 The reference for the Glut functions is taken from <https://www.opengl.org/resources/libraries/glut/glut-3.spec.pdf>
-
-
 
 ## Example
 	package main
@@ -58,77 +58,6 @@ The reference for the Glut functions is taken from <https://www.opengl.org/resou
 			}
 		}
 	}
-
-## Coverage
-
-	Initialization (100%)
-	  void glutInit(int *argcp, char **argv)
-	  void glutInitWindowSize(int width, int height)
-	  void glutInitWindowPosition(int x, int y)
-	  void glutInitDisplayMode(unsigned int mode)
-
-	Event Processing (100%)
-	  void glutMainLoop(void)
-
-	Window Management (100%)
-	  int glutCreateWindow(char *name)
-	  int glutCreateSubWindow(int win, int x, int y, int width, int height)
-	  void glutSetWindow(int win);
-	  int glutGetWindow(void);
-	  void glutDestroyWindow(int win)
-	  void glutPostRedisplay(void)
-	  void glutSwapBuffers(void)
-	  void glutPositionWindow(int x, int y)
-	  void glutReshapeWindow(int width, int height)
-	  void glutFullScreen(void)
-	  void glutPopWindow(void)
-	  void glutPushWindow(void)
-	  void glutShowWindow(void)
-	  void glutHideWindow(void)
-	  void glutIconifyWindow(void)
-	  void glutSetWindowTitle(char *name)
-	  void glutSetIconTitle(char *name)
-	  void glutSetCursor(int cursor)
-
-	Overlay Management (100%)
-	  void glutEstablishOverlay(void)
-	  void glutUseLayer(GLenum layer)
-	  void glutRemoveOverlay(void)
-	  void glutPostOverlayRedisplay(void)
-	  void glutWindowPostOverlayRedisplay(int win)
-	  void glutShowOverlay(void)
-	  void glutHideOverlay(void)
-
-	Menu Management (0%)
-
-	Callback Registration (48%)
-	  void glutDisplayFunc(void (*func)(void))
-	  void glutOverlayDisplayFunc(void (*func)(void))
-	  void glutReshapeFunc(void (*func)(int width, int height))
-	  void glutKeyboardFunc(void (*func)(unsigned char key, int x, int y))
-	  void glutMouseFunc(void (*func)(int button, int state, int x, int y))
-	  void glutMotionFunc(void (*func)(int x, int y))
-	  void glutPassiveMotionFunc(void (*func)(int x, int y))
-	  void glutVisibilityFunc(void (*func)(int state))
-	  void glutEntryFunc(void (*func)(int state))
-	  void glutTimerFunc(unsigned int msecs, void (*func)(int value), int value)
-	  void glutIdleFunc(void (*func)(void))
-
-	Colormap Management (100%)
-	  void glutSetColor(int cell, GLfloat red, GLfloat green, GLfloat blue)
-	  GLfloat glutGetColor(int cell, int component)
-	  void glutCopyColormap(int win)
-
-	State Retrieval (100%)
-	  int glutGet(GLenum state)
-	  int glutLayerGet(GLenum info)
-	  int glutDeviceGet(GLenum info)
-	  int glutGetModifiers(void)
-	  int glutExtensionSupported(char *extension)
-
-	Font Rendering (0%)
-
-	Geometric Object Rendering (0%)
 
 ## Copyright
 Copyright 2014 Vitali Baumtrok
