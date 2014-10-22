@@ -42,6 +42,12 @@ void register_display() {
 void register_overlayDisplay() {
 	glutOverlayDisplayFunc(&goOverlayDisplay);
 }
+int create_menu() {
+	return glutCreateMenu(&goMenu);
+}
+int create_menuNullCallback() {
+	return glutCreateMenu(NULL);
+}
 void register_reshape() {
 	glutReshapeFunc(&goReshape);
 }
@@ -63,11 +69,41 @@ void register_visibility() {
 void register_entry() {
 	glutEntryFunc(&goEntry);
 }
-void register_timer(unsigned int msecs, int timerId) {
-	glutTimerFunc(msecs, &goTimer, timerId);
+void register_special() {
+	glutSpecialFunc(&goSpecial);
+}
+void register_spaceballMotion() {
+	glutSpaceballMotionFunc(&goSpaceballMotion);
+}
+void register_spaceballRotate() {
+	glutSpaceballRotateFunc(&goSpaceballRotate);
+}
+void register_spaceballButton() {
+	glutSpaceballButtonFunc(&goSpaceballButton);
+}
+void register_buttonBox() {
+	glutButtonBoxFunc(&goButtonBox);
+}
+void register_dials() {
+	glutDialsFunc(&goDials);
+}
+void register_tabletMotion() {
+	glutTabletMotionFunc(&goTabletMotion);
+}
+void register_tabletButton() {
+	glutTabletButtonFunc(&goTabletButton);
+}
+void register_menuStatus() {
+	glutMenuStatusFunc(&goMenuStatus);
+}
+void register_menuState() {
+	glutMenuStateFunc(&goMenuState);
 }
 void register_idle() {
 	glutIdleFunc(&goIdle);
+}
+void register_timer(unsigned int msecs, int timerId) {
+	glutTimerFunc(msecs, &goTimer, timerId);
 }
 
 
@@ -100,8 +136,67 @@ void unregister_visibility() {
 void unregister_entry() {
 	glutEntryFunc(NULL);
 }
+void unregister_special() {
+	glutSpecialFunc(NULL);
+}
+void unregister_spaceballMotion() {
+	glutSpaceballMotionFunc(NULL);
+}
+void unregister_spaceballRotate() {
+	glutSpaceballRotateFunc(NULL);
+}
+void unregister_spaceballButton() {
+	glutSpaceballButtonFunc(NULL);
+}
+void unregister_buttonBox() {
+	glutButtonBoxFunc(NULL);
+}
+void unregister_dials() {
+	glutDialsFunc(NULL);
+}
+void unregister_tabletMotion() {
+	glutTabletMotionFunc(NULL);
+}
+void unregister_tabletButton() {
+	glutTabletButtonFunc(NULL);
+}
+void unregister_menuStatus() {
+	glutMenuStatusFunc(NULL);
+}
+void unregister_menuState() {
+	glutMenuStateFunc(NULL);
+}
 void unregister_idle() {
 	glutIdleFunc(NULL);
 }
 
+// Fonts
+
+void *const_GLUT_STROKE_ROMAN() {
+	return GLUT_STROKE_ROMAN;
+}
+void *const_GLUT_STROKE_MONO_ROMAN() {
+	return GLUT_STROKE_MONO_ROMAN;
+}
+void *const_GLUT_BITMAP_9_BY_15() {
+	return GLUT_BITMAP_9_BY_15;
+}
+void *const_GLUT_BITMAP_8_BY_13() {
+	return GLUT_BITMAP_8_BY_13;
+}
+void *const_GLUT_BITMAP_TIMES_ROMAN_10() {
+	return GLUT_BITMAP_TIMES_ROMAN_10;
+}
+void *const_GLUT_BITMAP_TIMES_ROMAN_24() {
+	return GLUT_BITMAP_TIMES_ROMAN_24;
+}
+void *const_GLUT_BITMAP_HELVETICA_10() {
+	return GLUT_BITMAP_HELVETICA_10;
+}
+void *const_GLUT_BITMAP_HELVETICA_12() {
+	return GLUT_BITMAP_HELVETICA_12;
+}
+void *const_GLUT_BITMAP_HELVETICA_18() {
+	return GLUT_BITMAP_HELVETICA_18;
+}
 

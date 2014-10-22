@@ -77,6 +77,31 @@ const (
 	OVERLAY = C.GLUT_OVERLAY
 )
 
+// window and menu status
+const (
+	MENU_NOT_IN_USE = C.GLUT_MENU_NOT_IN_USE
+	MENU_IN_USE = C.GLUT_MENU_IN_USE
+	NOT_VISIBLE = C.GLUT_NOT_VISIBLE
+	VISIBLE = C.GLUT_VISIBLE
+	HIDDEN = C.GLUT_HIDDEN
+	FULLY_RETAINED = C.GLUT_FULLY_RETAINED
+	PARTIALLY_RETAINED = C.GLUT_PARTIALLY_RETAINED
+	FULLY_COVERED = C.GLUT_FULLY_COVERED
+)
+
+// fonts
+const (
+	STROKE_ROMAN = 0
+	STROKE_MONO_ROMAN = 1
+	BITMAP_9_BY_15 = 2
+	BITMAP_8_BY_13 = 3
+	BITMAP_TIMES_ROMAN_10 = 4
+	BITMAP_TIMES_ROMAN_24 = 5
+	BITMAP_HELVETICA_10 = 6
+	BITMAP_HELVETICA_12 = 7
+	BITMAP_HELVETICA_18 = 8
+)
+
 // the Get parameters
 const (
 	WINDOW_X = C.GLUT_WINDOW_X
@@ -230,6 +255,7 @@ type tWindowCallbacks struct {
 	tabletMotion func(x, y int)
 	tabletButton func(button, state, x, y int)
 	menuStatus func(status, x, y int)
+	menuState func(status int)
 	windowStatus func(state int)
 	keyboardUp func(key uint8, x, y int)
 	specialUp func(key, x, y int)
@@ -241,7 +267,12 @@ type tWindowCallbacks struct {
 var (
 	windowCallbacks = make(map[int]*tWindowCallbacks)
 	timers = make(map[int]func(timerId int))
+	menus = make(map[int]func(value int))
 )
+
+/*
+ * Initialization
+ */
 
 func Init() {
 	argc := C.int(len(os.Args))
@@ -273,6 +304,10 @@ func InitDisplayMode(mode uint) {
 func MainLoop() {
 	C.glutMainLoop()
 }
+
+/*
+ * Window Management
+ */
 
 func CreateWindow(title string) (windowId int) {
 	ctitle := C.CString(title)
@@ -360,6 +395,10 @@ func SetCursor(cursor int) {
 	C.glutSetCursor(C.int(cursor))
 }
 
+/*
+ * Overlay Management
+ */
+
 func EstablishOverlay() {
 	C.glutEstablishOverlay()
 }
@@ -388,6 +427,76 @@ func ShowOverlay() {
 func HideOverlay() {
 	C.glutHideOverlay()
 }
+
+/*
+ * Menu Management
+ */
+
+func CreateMenu(menu func(value int)) (menuId int) {
+	if menu != nil {
+		menuId = int(C.create_menu())
+	} else {
+		menuId = int(C.create_menuNullCallback())
+	}
+	menus[menuId] = menu
+	return menuId
+}
+
+func SetMenu(menuId int) {
+	C.glutSetMenu(C.int(menuId))
+}
+
+func GetMenu() (menuId int) {
+	menuId = int(C.glutGetMenu())
+	return menuId
+}
+
+func DestroyMenu(menuId int) {
+	C.glutDestroyMenu(C.int(menuId))
+	delete(menus, menuId)
+}
+
+func AddMenuEntry(name string, value int) {
+	cname := C.CString(name)
+	defer C.free(unsafe.Pointer(cname))
+	C.glutAddMenuEntry(cname, C.int(value))
+}
+
+func AddSubMenu(name string, menuId int) {
+	cname := C.CString(name)
+	defer C.free(unsafe.Pointer(cname))
+	C.glutAddSubMenu(cname, C.int(menuId))
+}
+
+func ChangeToMenuEntry(entry int, name string, value int) {
+	cname := C.CString(name)
+	defer C.free(unsafe.Pointer(cname))
+	C.glutChangeToMenuEntry(C.int(entry), cname, C.int(value))
+}
+
+func ChangeToSubMenu(entry int, name string, menuId int) {
+	cname := C.CString(name)
+	defer C.free(unsafe.Pointer(cname))
+	C.glutChangeToSubMenu(C.int(entry), cname, C.int(menuId))
+}
+
+func RemoveMenuItem(entry int, name string, menuId int) {
+	cname := C.CString(name)
+	defer C.free(unsafe.Pointer(cname))
+	C.glutChangeToSubMenu(C.int(entry), cname, C.int(menuId))
+}
+
+func AttachMenu(button int) {
+	C.glutAttachMenu(C.int(button))
+}
+
+func DetachMenu(button int) {
+	C.glutDetachMenu(C.int(button))
+}
+
+/*
+ * Callback Registration
+ */
 
 func DisplayFunc(display func()) {
 	windowId := int(C.glutGetWindow())
@@ -479,11 +588,104 @@ func EntryFunc(entry func(state int)) {
 	}
 }
 
-// Do not register a second timer with the same id, before the first run out.
-// timer should not be nil.
-func TimerFunc(msecs int, timer func(timerId int), timerId int) {
-	timers[timerId] = timer
-	C.register_timer(C.uint(msecs), C.int(timerId))
+func SpecialFunc(special func(key, x, y int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].special = special
+	if special != nil {
+		C.register_special()
+	} else {
+		C.unregister_special()
+	}
+}
+
+func SpaceballMotionFunc(spaceballMotion func(x, y, z int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].spaceballMotion = spaceballMotion
+	if spaceballMotion != nil {
+		C.register_spaceballMotion()
+	} else {
+		C.unregister_spaceballMotion()
+	}
+}
+
+func SpaceballRotateFunc(spaceballRotate func(x, y, z int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].spaceballRotate = spaceballRotate
+	if spaceballRotate != nil {
+		C.register_spaceballRotate()
+	} else {
+		C.unregister_spaceballRotate()
+	}
+}
+
+func SpaceballButtonFunc(spaceballButton func(button, state int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].spaceballButton = spaceballButton
+	if spaceballButton != nil {
+		C.register_spaceballButton()
+	} else {
+		C.unregister_spaceballButton()
+	}
+}
+
+func ButtonBoxFunc(buttonBox func(button, state int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].buttonBox = buttonBox
+	if buttonBox != nil {
+		C.register_buttonBox()
+	} else {
+		C.unregister_buttonBox()
+	}
+}
+
+func DialsFunc(dials func(dial, value int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].dials = dials
+	if dials != nil {
+		C.register_dials()
+	} else {
+		C.unregister_dials()
+	}
+}
+
+func TabletMotionFunc(tabletMotion func(x, y int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].tabletMotion = tabletMotion
+	if tabletMotion != nil {
+		C.register_tabletMotion()
+	} else {
+		C.unregister_tabletMotion()
+	}
+}
+
+func TabletButtonFunc(tabletButton func(button, state, x, y int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].tabletButton = tabletButton
+	if tabletButton != nil {
+		C.register_tabletButton()
+	} else {
+		C.unregister_tabletButton()
+	}
+}
+
+func MenuStatusFunc(menuStatus func(status, x, y int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].menuStatus = menuStatus
+	if menuStatus != nil {
+		C.register_menuStatus()
+	} else {
+		C.unregister_menuStatus()
+	}
+}
+
+func MenuStateFunc(menuState func(status int)) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].menuState = menuState
+	if menuState != nil {
+		C.register_menuState()
+	} else {
+		C.unregister_menuState()
+	}
 }
 
 func IdleFunc(idle func()) {
@@ -496,6 +698,17 @@ func IdleFunc(idle func()) {
 	}
 }
 
+// Do not register a second timer with the same id, before the first run out.
+// timer should not be nil.
+func TimerFunc(msecs int, timer func(timerId int), timerId int) {
+	timers[timerId] = timer
+	C.register_timer(C.uint(msecs), C.int(timerId))
+}
+
+/*
+ * Color Index Colormap Management
+ */
+
 func SetColor(cell int, red, green, blue float32) {
 	C.glutSetColor(C.int(cell), C.GLfloat(red), C.GLfloat(green), C.GLfloat(blue))
 }
@@ -507,6 +720,10 @@ func GetColor(cell, component int) (float32) {
 func CopyColormap(windowId int) {
 	C.glutCopyColormap(C.int(windowId))
 }
+
+/*
+ * State Retrieval
+ */
 
 func Get(state int) int {
 	return int(C.glutGet(C.GLenum(state)))
@@ -531,6 +748,104 @@ func ExtensionSupported(extension string) (supported bool) {
 	return supported
 }
 
+/*
+ * Font Rendering
+ */
+
+func fontPtr(font int) unsafe.Pointer {
+	switch font {
+		case STROKE_ROMAN: return C.const_GLUT_STROKE_ROMAN()
+		case STROKE_MONO_ROMAN: return C.const_GLUT_STROKE_MONO_ROMAN()
+		case BITMAP_9_BY_15: return C.const_GLUT_BITMAP_9_BY_15()
+		case BITMAP_8_BY_13: return C.const_GLUT_BITMAP_8_BY_13()
+		case BITMAP_TIMES_ROMAN_10: return C.const_GLUT_BITMAP_TIMES_ROMAN_10()
+		case BITMAP_TIMES_ROMAN_24: return C.const_GLUT_BITMAP_TIMES_ROMAN_24()
+		case BITMAP_HELVETICA_10: return C.const_GLUT_BITMAP_HELVETICA_10()
+		case BITMAP_HELVETICA_12: return C.const_GLUT_BITMAP_HELVETICA_12()
+		case BITMAP_HELVETICA_18: return C.const_GLUT_BITMAP_HELVETICA_18()
+	}
+	panic("unknown font")
+}
+
+func BitmapCharacter(font int, character rune) {
+	C.glutBitmapCharacter(fontPtr(font), C.int(character))
+}
+
+func BitmapWidth(font int, character rune) int {
+	return int(C.glutBitmapWidth(fontPtr(font), C.int(character)))
+}
+
+func StrokeCharacter(font int, character rune) {
+	C.glutStrokeCharacter(fontPtr(font), C.int(character))
+}
+
+func StrokeWidth(font int, character rune) int {
+	return int(C.glutStrokeWidth(fontPtr(font), C.int(character)))
+}
+
+/*
+ * Geometric Object Rendering
+ */
+
+func SolidSphere(radius float64, slices, stacks int) {
+	C.glutSolidSphere(C.GLdouble(radius), C.GLint(slices), C.GLint(stacks))
+}
+func WireSphere(radius float64, slices, stacks int) {
+	C.glutWireSphere(C.GLdouble(radius), C.GLint(slices), C.GLint(stacks))
+}
+func SolidCube(size float64) {
+	C.glutSolidCube(C.GLdouble(size))
+}
+func WireCube(size float64) {
+	C.glutWireCube(C.GLdouble(size))
+}
+func SolidCone(base, height float64, slices, stacks int) {
+	C.glutSolidCone(C.GLdouble(base), C.GLdouble(height), C.GLint(slices), C.GLint(stacks))
+}
+func WireCone(base, height float64, slices, stacks int) {
+	C.glutWireCone(C.GLdouble(base), C.GLdouble(height), C.GLint(slices), C.GLint(stacks))
+}
+func SolidTorus(innerRadius, outerRadius float64, nsides, rings int) {
+	C.glutSolidTorus(C.GLdouble(innerRadius), C.GLdouble(outerRadius), C.GLint(nsides), C.GLint(rings))
+}
+func WireTorus(innerRadius, outerRadius float64, nsides, rings int) {
+	C.glutWireTorus(C.GLdouble(innerRadius), C.GLdouble(outerRadius), C.GLint(nsides), C.GLint(rings))
+}
+func SolidDodecahedron() {
+	C.glutSolidDodecahedron()
+}
+func WireDodecahedron() {
+	C.glutWireDodecahedron()
+}
+func SolidOctahedron() {
+	C.glutSolidOctahedron()
+}
+func WireOctahedron() {
+	C.glutWireOctahedron()
+}
+func SolidTetrahedron() {
+	C.glutSolidTetrahedron()
+}
+func WireTetrahedron() {
+	C.glutWireTetrahedron()
+}
+func SolidIcosahedron() {
+	C.glutSolidIcosahedron()
+}
+func WireIcosahedron() {
+	C.glutWireIcosahedron()
+}
+func SolidTeapot(size float64) {
+	C.glutSolidTeapot(C.GLdouble(size))
+}
+func WireTeapot(size float64) {
+	C.glutWireTeapot(C.GLdouble(size))
+}
+
+
+/*
+ * Go Exported Functions
+ */
 
 //export goDisplay
 func goDisplay() {
@@ -542,6 +857,12 @@ func goDisplay() {
 func goOverlayDisplay() {
 	windowId := int(C.glutGetWindow())
 	windowCallbacks[windowId].overlayDisplay()
+}
+
+//export goMenu
+func goMenu(value C.int) {
+	menuId := int(C.glutGetMenu())
+	menus[menuId](int(value))
 }
 
 //export goReshape
@@ -586,6 +907,72 @@ func goEntry(state C.int) {
 	windowCallbacks[windowId].entry(int(state))
 }
 
+//export goSpecial
+func goSpecial(key, x, y C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].special(int(key), int(x), int(y))
+}
+
+//export goSpaceballMotion
+func goSpaceballMotion(x, y, z C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].spaceballMotion(int(x), int(y), int(z))
+}
+
+//export goSpaceballRotate
+func goSpaceballRotate(x, y, z C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].spaceballRotate(int(x), int(y), int(z))
+}
+
+//export goSpaceballButton
+func goSpaceballButton(button, state C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].spaceballButton(int(button), int(state))
+}
+
+//export goButtonBox
+func goButtonBox(button, state C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].buttonBox(int(button), int(state))
+}
+
+//export goDials
+func goDials(dial, value C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].dials(int(dial), int(value))
+}
+
+//export goTabletMotion
+func goTabletMotion(x, y C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].tabletMotion(int(x), int(y))
+}
+
+//export goTabletButton
+func goTabletButton(button, state, x, y C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].tabletButton(int(button), int(state), int(x), int(y))
+}
+
+//export goMenuStatus
+func goMenuStatus(status, x, y C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].menuStatus(int(status), int(x), int(y))
+}
+
+//export goMenuState
+func goMenuState(status C.int) {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].menuState(int(status))
+}
+
+//export goIdle
+func goIdle() {
+	windowId := int(C.glutGetWindow())
+	windowCallbacks[windowId].idle()
+}
+
 //export goTimer
 func goTimer(timerId C.int) {
 	goTimerId := int(timerId)
@@ -594,11 +981,6 @@ func goTimer(timerId C.int) {
 	timer(goTimerId)
 }
 
-//export goIdle
-func goIdle() {
-	windowId := int(C.glutGetWindow())
-	windowCallbacks[windowId].idle()
-}
 
 
 

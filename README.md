@@ -17,6 +17,10 @@ _Note: You need the programming language Go and git to run these commands._
 ## Development
 Programming language Go is used.
 
+The reference for the Glut functions is taken from <https://www.opengl.org/resources/libraries/glut/glut-3.spec.pdf>
+
+
+
 ## Example
 	package main
 
