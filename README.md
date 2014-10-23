@@ -1,7 +1,7 @@
-# glut
+# GLUT
 
 ## Abstract
-This is glut binding for the programming language Go. It works on linux.
+This is GLUT binding for the programming language Go. It works on linux.
 
 If you want the functions of freeglut download github.com/vitalibaumtrok/freeglut.
 
@@ -19,7 +19,7 @@ _Note: You need the programming language Go and git to run these commands._
 ## Development
 Programming language Go is used.
 
-The reference for the Glut functions is taken from <https://www.opengl.org/resources/libraries/glut/glut-3.spec.pdf>
+The reference for the GLUT version 3 functions is taken from <https://www.opengl.org/resources/libraries/glut/glut-3.spec.pdf>. The reference for the GLUT version 3.7 functions is taken from source code available on <https://www.opengl.org/resources/libraries/glut/glut_downloads.php>.
 
 ## Example
 	package main
