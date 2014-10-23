@@ -1,7 +1,7 @@
 # GLUT
 
 ## Abstract
-This is GLUT version 3.7 binding for the programming language Go. It works on linux.
+This is GLUT (version 3.7) binding for the programming language Go. It works on linux.
 
 If you want the functions of freeglut download github.com/vitalibaumtrok/freeglut.
 
@@ -14,7 +14,7 @@ To update the package type
 
 	go get -u github.com/vitalibaumtrok/glut
 
-_Note: You need the programming language Go and git to run these commands._
+_Note: You need GLUT (or freeglut), the programming language Go and git to run these commands._
 
 ## Development
 Programming language Go is used.

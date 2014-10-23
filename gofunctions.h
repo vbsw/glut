@@ -53,6 +53,10 @@ void register_menuStatus();
 void register_menuState();
 void register_idle();
 void register_timer(unsigned int msecs, int timerId);
+void register_windowStatus();
+void register_keyboardUp();
+void register_specialUp();
+void register_joystick(int pollInterval);
 
 void unregister_display();
 void unregister_overlayDisplay();
@@ -74,6 +78,10 @@ void unregister_tabletButton();
 void unregister_menuStatus();
 void unregister_menuState();
 void unregister_idle();
+void unregister_windowStatus();
+void unregister_keyboardUp();
+void unregister_specialUp();
+void unregister_joystick(int pollInterval);
 
 void *const_GLUT_STROKE_ROMAN();
 void *const_GLUT_STROKE_MONO_ROMAN();
