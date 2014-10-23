@@ -59,7 +59,7 @@ The reference for the GLUT version 3 functions is taken from <https://www.opengl
 		}
 	}
 
-## Copyright
+## Public Domain
 This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
