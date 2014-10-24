@@ -7,14 +7,46 @@ If you want the functions of freeglut download github.com/vitalibaumtrok/freeglu
 
 ## Installation
 
-	go get github.com/vitalibaumtrok/glut
-	go install github.com/vitalibaumtrok/glut
+### Linux
+Install the programming language Go as described here <https://golang.org/doc/install>. Install Git and GLUT or freeglut.
 
-To update the package type
+Get this project with
+	$ go get github.com/vitalibaumtrok/glut
 
-	go get -u github.com/vitalibaumtrok/glut
+To update the package run (if needed)
+	$ go get -u github.com/vitalibaumtrok/glut
 
-_Note: You need GLUT (or freeglut), the programming language Go and git to run these commands._
+Compile it with
+	$ go install github.com/vitalibaumtrok/glut
+
+### Windows
+Install the programming language Go as described here <https://golang.org/doc/install>. Install Git.
+
+Get this project with (run this preferably from the Git Bash)
+	$ go get github.com/vitalibaumtrok/glut
+
+To update the package run (if needed)
+	$ go get -u github.com/vitalibaumtrok/glut
+
+Cgo needs another compiler to compile c files. On a 64 bit system a 64 bit compiler is needed. I tried it with the gcc. MinGW provides only 32 bit binaries. So go to <http://tdm-gcc.tdragon.net> to download 64 bit gcc binaries. Install it.
+
+Then download freeglut from <http://www.transmissionzero.co.uk/software/freeglut-devel/> and unpack it for example in
+	C:/Users/Alice/Downloads/freeglut
+
+Then open the file github.com/vitalibaumtrok/glut/glut.go and change the first line in
+	// #cgo LDFLAGS: -lGL -lGLU -lglut
+	// #include <stdlib.h>
+	// #include <GL/glut.h>
+	// #include "gofunctions.h"
+
+to
+	// #cgo LDFLAGS: -IC:/Users/Alice/Downloads/freeglut/include -LC:/Users/Alice/Downloads/freeglut/bin/x64 -l:freeglut.dll
+	// #include <stdlib.h>
+	// #include <GL/glut.h>
+	// #include "gofunctions.h"
+
+To compile run
+	$ go install github.com/vitalibaumtrok/glut
 
 ## Development
 Programming language Go is used.
@@ -59,7 +91,7 @@ The reference for the GLUT version 3 functions is taken from <https://www.opengl
 		}
 	}
 
-## Public Domain
+## Licensing Terms
 This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
