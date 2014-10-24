@@ -1,7 +1,7 @@
 # GLUT
 
 ## Abstract
-This is GLUT (version 3.7) binding for the programming language Go. It works on linux.
+This is GLUT (version 3.7) binding for the programming language Go.
 
 If you want the functions of freeglut download github.com/vitalibaumtrok/freeglut.
 
