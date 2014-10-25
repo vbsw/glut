@@ -5,6 +5,11 @@ This is GLUT (version 3.7) binding for the programming language Go.
 
 If you want the functions of freeglut download github.com/vitalibaumtrok/freeglut.
 
+## Development
+Programming language Go is used.
+
+The reference for the GLUT version 3 functions is taken from <https://www.opengl.org/resources/libraries/glut/glut-3.spec.pdf>. The reference for the GLUT version 3.7 functions is taken from source code available on <https://www.opengl.org/resources/libraries/glut/glut_downloads.php>.
+
 ## Installation
 
 ### Linux
@@ -56,11 +61,6 @@ to
 To compile run
 
 	$ go install github.com/vitalibaumtrok/glut
-
-## Development
-Programming language Go is used.
-
-The reference for the GLUT version 3 functions is taken from <https://www.opengl.org/resources/libraries/glut/glut-3.spec.pdf>. The reference for the GLUT version 3.7 functions is taken from source code available on <https://www.opengl.org/resources/libraries/glut/glut_downloads.php>.
 
 ## Example
 
