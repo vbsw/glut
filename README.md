@@ -3,7 +3,7 @@
 ## Abstract
 This is GLUT (version 3.7) binding for the programming language Go.
 
-If you want the functions of freeglut download github.com/vitalibaumtrok/freeglut.
+If you want the functions of freeglut download <github.com/vitalibaumtrok/freeglut>.
 
 ## Copying
 This is free and unencumbered software released into the public domain.
@@ -39,7 +39,7 @@ The reference for the GLUT version 3 functions is taken from <https://www.opengl
 ## Installation
 
 ### Linux
-Install the programming language Go as described here <https://golang.org/doc/install>. You also need Git, the C standard library development package and the glut development package. Install them for example with
+Install the programming language Go as described here <https://golang.org/doc/install>. You also need Git, the C standard library development package and the GLUT development package. Install them for example with
 
         $ sudo apt-get install git libc6-dev freeglut3-dev
 
