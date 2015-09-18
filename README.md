@@ -39,7 +39,9 @@ The reference for the GLUT version 3 functions is taken from <https://www.opengl
 ## Installation
 
 ### Linux
-Install the programming language Go as described here <https://golang.org/doc/install>. Install Git and GLUT or freeglut.
+Install the programming language Go as described here <https://golang.org/doc/install>. You also need Git, the C standard library development package and the glut development package. Install them for example with
+
+        $ sudo apt-get install git libc6-dev freeglut3-dev
 
 Get this project with
 
