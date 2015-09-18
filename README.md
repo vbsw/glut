@@ -72,7 +72,7 @@ Then download freeglut from <http://www.transmissionzero.co.uk/software/freeglut
 
 	C:/Users/Alice/Downloads/freeglut
 
-Then open the file github.com/vitalibaumtrok/glut/glut.go and change the first line in
+Then open the file github.com/vitalibaumtrok/glut/glut.go and change the first line from
 
 	// #cgo LDFLAGS: -lGL -lGLU -lglut
 	// #include <stdlib.h>
