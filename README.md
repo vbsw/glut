@@ -3,7 +3,7 @@
 ## Abstract
 This is GLUT (version 3.7) binding for the programming language Go.
 
-If you want the functions of freeglut download <github.com/vitalibaumtrok/freeglut>.
+If you want the functions of freeglut download <https://github.com/vitalibaumtrok/freeglut>.
 
 ## Copying
 This is free and unencumbered software released into the public domain.
