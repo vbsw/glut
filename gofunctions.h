@@ -30,6 +30,17 @@
 #define GOFUNCTIONS_H
 
 
+void glutSolidSphereCompatibilityWrapper( double radius, GLint slices, GLint stacks );
+void glutWireSphereCompatibilityWrapper( double radius, GLint slices, GLint stacks );
+void glutSolidCubeCompatibilityWrapper( double size );
+void glutWireCubeCompatibilityWrapper( double size );
+void glutSolidConeCompatibilityWrapper( double base, double height, GLint slices, GLint stacks );
+void glutWireConeCompatibilityWrapper( double base, double height, GLint slices, GLint stacks );
+void glutSolidTorusCompatibilityWrapper( double innerRadius, double outerRadius, GLint nsides, GLint rings );
+void glutWireTorusCompatibilityWrapper( double innerRadius, double outerRadius, GLint nsides, GLint rings );
+void glutSolidTeapotCompatibilityWrapper( double size );
+void glutWireTeapotCompatibilityWrapper( double size );
+
 void register_display();
 void register_overlayDisplay();
 int create_menu();

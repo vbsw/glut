@@ -900,28 +900,28 @@ func StrokeLength(font int, s string) int {
  */
 
 func SolidSphere(radius float64, slices, stacks int) {
-	C.glutSolidSphere(C.GLdouble(radius), C.GLint(slices), C.GLint(stacks))
+	C.glutSolidSphereCompatibilityWrapper(C.double(radius), C.GLint(slices), C.GLint(stacks))
 }
 func WireSphere(radius float64, slices, stacks int) {
-	C.glutWireSphere(C.GLdouble(radius), C.GLint(slices), C.GLint(stacks))
+	C.glutWireSphereCompatibilityWrapper(C.double(radius), C.GLint(slices), C.GLint(stacks))
 }
 func SolidCube(size float64) {
-	C.glutSolidCube(C.GLdouble(size))
+	C.glutSolidCubeCompatibilityWrapper(C.double(size))
 }
 func WireCube(size float64) {
-	C.glutWireCube(C.GLdouble(size))
+	C.glutWireCubeCompatibilityWrapper(C.double(size))
 }
 func SolidCone(base, height float64, slices, stacks int) {
-	C.glutSolidCone(C.GLdouble(base), C.GLdouble(height), C.GLint(slices), C.GLint(stacks))
+	C.glutSolidConeCompatibilityWrapper(C.double(base), C.double(height), C.GLint(slices), C.GLint(stacks))
 }
 func WireCone(base, height float64, slices, stacks int) {
-	C.glutWireCone(C.GLdouble(base), C.GLdouble(height), C.GLint(slices), C.GLint(stacks))
+	C.glutWireConeCompatibilityWrapper(C.double(base), C.double(height), C.GLint(slices), C.GLint(stacks))
 }
 func SolidTorus(innerRadius, outerRadius float64, nsides, rings int) {
-	C.glutSolidTorus(C.GLdouble(innerRadius), C.GLdouble(outerRadius), C.GLint(nsides), C.GLint(rings))
+	C.glutSolidTorusCompatibilityWrapper(C.double(innerRadius), C.double(outerRadius), C.GLint(nsides), C.GLint(rings))
 }
 func WireTorus(innerRadius, outerRadius float64, nsides, rings int) {
-	C.glutWireTorus(C.GLdouble(innerRadius), C.GLdouble(outerRadius), C.GLint(nsides), C.GLint(rings))
+	C.glutWireTorusCompatibilityWrapper(C.double(innerRadius), C.double(outerRadius), C.GLint(nsides), C.GLint(rings))
 }
 func SolidDodecahedron() {
 	C.glutSolidDodecahedron()
@@ -948,10 +948,10 @@ func WireIcosahedron() {
 	C.glutWireIcosahedron()
 }
 func SolidTeapot(size float64) {
-	C.glutSolidTeapot(C.GLdouble(size))
+	C.glutSolidTeapotCompatibilityWrapper(C.double(size))
 }
 func WireTeapot(size float64) {
-	C.glutWireTeapot(C.GLdouble(size))
+	C.glutWireTeapotCompatibilityWrapper(C.double(size))
 }
 
 /*

@@ -28,24 +28,24 @@
 
 #include <stdio.h>
 
-// Go functions can not be passed to c directly.
-// They can only be called from c.
-// This code is an indirection to call Go callbacks.
-// _cgo_export.h is generated automatically by cgo.
+/* Go functions can not be passed to c directly.            */
+/* They can only be called from c.                          */
+/* This code is an indirection to call Go callbacks.        */
+/* _cgo_export.h is generated automatically by cgo.         */
 #include "_cgo_export.h"
 
-// Exported functions from Go are:
-// goDisplay
-// goOverlayDisplay
-// goReshape
-// goKeyboard
-// goMouse
-// goMotion
-// goPassiveMotion
-// goVisibility
-// goEntry
-// goTimer
-// goIdle
+/* Exported functions from Go are:                          */
+/* goDisplay                                                */
+/* goOverlayDisplay                                         */
+/* goReshape                                                */
+/* goKeyboard                                               */
+/* goMouse                                                  */
+/* goMotion                                                 */
+/* goPassiveMotion                                          */
+/* goVisibility                                             */
+/* goEntry                                                  */
+/* goTimer                                                  */
+/* goIdle                                                   */
 
 
 #if defined(__APPLE__)
@@ -55,7 +55,41 @@
 #endif
 
 
-// register callbacks
+/* in freeglut 3.0 GLdouble is replaced by double */
+
+void glutSolidSphereCompatibilityWrapper( double radius, GLint slices, GLint stacks ) {
+	glutSolidSphere( radius, slices, stacks );
+}
+void glutWireSphereCompatibilityWrapper( double radius, GLint slices, GLint stacks ) {
+	glutWireSphere( radius, slices, stacks );
+}
+void glutSolidCubeCompatibilityWrapper( double size ) {
+	glutSolidCube( size );
+}
+void glutWireCubeCompatibilityWrapper( double size ) {
+	glutWireCube( size );
+}
+void glutSolidConeCompatibilityWrapper( double base, double height, GLint slices, GLint stacks ) {
+	glutSolidCone( base, height, slices, stacks );
+}
+void glutWireConeCompatibilityWrapper( double base, double height, GLint slices, GLint stacks ) {
+	glutWireCone( base, height, slices, stacks );
+}
+void glutSolidTorusCompatibilityWrapper( double innerRadius, double outerRadius, GLint nsides, GLint rings ) {
+	glutSolidTorus( innerRadius, outerRadius, nsides, rings );
+}
+void glutWireTorusCompatibilityWrapper( double innerRadius, double outerRadius, GLint nsides, GLint rings ) {
+	glutWireTorus( innerRadius, outerRadius, nsides, rings );
+}
+void glutSolidTeapotCompatibilityWrapper( double size ) {
+	glutSolidTeapot( size );
+}
+void glutWireTeapotCompatibilityWrapper( double size ) {
+	glutWireTeapot( size );
+}
+
+
+/* register callbacks */
 
 void register_display() {
 	glutDisplayFunc(&goDisplay);
@@ -140,7 +174,7 @@ void register_joystick(int pollInterval) {
 }
 
 
-// unregister callbacks
+/* unregister callbacks */
 
 void unregister_display() {
 	glutDisplayFunc(0);
