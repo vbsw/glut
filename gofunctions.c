@@ -249,7 +249,7 @@ void unregister_joystick(int pollInterval) {
 	glutJoystickFunc(0, pollInterval);
 }
 
-// Fonts
+/* Fonts */
 
 void *const_GLUT_STROKE_ROMAN() {
 	return GLUT_STROKE_ROMAN;
