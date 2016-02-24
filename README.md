@@ -1,7 +1,7 @@
 # GLUT
 
 ## Abstract
-This is GLUT (version 3.7) binding for the programming language Go.
+This is GLUT (version 3.7) binding for the programming language Chapel.
 
 If you want the binding of freeglut visit <https://github.com/vitalibaumtrok/freeglut>.
 
@@ -32,103 +32,33 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org>
 
 ## Development
-Programming language Go is used.
+Programming language Chapel is used.
 
-There is a branch for the programming language Chapel. To check it out use
+There is a branch for the programming language Go. To check it out use
 
-	$ git checkout chapel
+	$ git checkout master
 
 The reference for the GLUT version 3 functions is taken from <https://www.opengl.org/resources/libraries/glut/glut-3.spec.pdf>. The reference for the GLUT version 3.7 functions is taken from source code available on <https://www.opengl.org/resources/libraries/glut/glut_downloads.php>.
 
 ## Installation
 
 ### Linux
-Install the programming language Go as described here <https://golang.org/doc/install>. You also need Git, the C standard library development package and the GLUT development package. Install them for example with
+[Download](http://chapel.cray.com/download.html) the programming language Chapel and install it as described here <http://chapel.cray.com/docs/1.12/usingchapel/README.html>. You also need Git and the GLUT development package. Install them for example with
 
-        $ sudo apt-get install git libc6-dev freeglut3-dev
+        $ sudo apt-get install git freeglut3-dev
 
-Get this project with
+Clone this project to folder glut with
 
-	$ go get github.com/vitalibaumtrok/glut
+	$ git clone https://github.com/vitalibaumtrok/glut.git glut
 
-To update the package run (if needed)
+or update your local copy of this branch with
 
-	$ go get -u github.com/vitalibaumtrok/glut
+	$ git pull origin chapel
 
-Compile it with
+Checkout the chapel branch with
 
-	$ go install github.com/vitalibaumtrok/glut
-
-### Windows
-Install the programming language Go as described here <https://golang.org/doc/install>. Install Git.
-
-Get this project with (run this preferably from the Git Bash)
-
-	$ go get github.com/vitalibaumtrok/glut
-
-To update the package run (if needed)
-
-	$ go get -u github.com/vitalibaumtrok/glut
-
-Cgo needs another compiler to compile c files. On a 64 bit system a 64 bit compiler is needed. I tried it with the gcc. MinGW provides only 32 bit binaries. So go to <http://tdm-gcc.tdragon.net> to download 64 bit gcc binaries. Install it.
-
-Then download freeglut from <http://www.transmissionzero.co.uk/software/freeglut-devel/> and unpack it for example to
-
-	C:/Users/Alice/Downloads/freeglut
-
-Then open the file github.com/vitalibaumtrok/glut/glut.go and change the first line from
-
-	// #cgo LDFLAGS: -lGL -lGLU -lglut
-	// #include <stdlib.h>
-	// #include <GL/glut.h>
-	// #include "gofunctions.h"
-
-to
-
-	// #cgo LDFLAGS: -IC:/Users/Alice/Downloads/freeglut/include -LC:/Users/Alice/Downloads/freeglut/bin/x64 -l:freeglut.dll
-	// #include <stdlib.h>
-	// #include <GL/glut.h>
-	// #include "gofunctions.h"
-
-To compile run
-
-	$ go install github.com/vitalibaumtrok/glut
+	$ git checkout chapel
 
 ## Example
 
-	package main
-
-	import (
-		"github.com/vitalibaumtrok/glut"
-	)
-
-	func main() {
-		glut.Init()
-		glut.InitDisplayMode(glut.SINGLE | glut.RGBA)
-		glut.InitWindowSize(640, 480)
-		glut.CreateWindow("Testing GLUT binding for Go");
-		glut.ReshapeFunc(reshape)
-		glut.DisplayFunc(display)
-		glut.KeyboardFunc(keyboard)
-		glut.MainLoop()
-	}
-
-	func reshape(width, height int) {
-		println("reshape")
-	}
-
-	func display() {
-		println("display")
-	}
-
-	func keyboard(key uint8, x, y int) {
-		if key==27 { // escape
-			glut.DestroyWindow(glut.GetWindow())
-		} else {
-			if (glut.GetModifiers() & glut.ACTIVE_CTRL) > 0 {
-				println("key pressed: ctrl +", key)
-			} else {
-				println("key pressed:", key)
-			}
-		}
-	}
+Will be added...
