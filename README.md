@@ -43,7 +43,7 @@ The reference for the GLUT version 3 functions is taken from <https://www.opengl
 ## Installation
 
 ### Linux
-[Download](http://chapel.cray.com/download.html) the programming language Chapel and install it as described here <http://chapel.cray.com/docs/1.12/usingchapel/README.html>. You also need Git and the GLUT development package. Install them for example with
+[Download](http://chapel.cray.com/download.html) the programming language Chapel and install it as described [here](http://chapel.cray.com/docs/1.12/usingchapel/README.html). You also need Git and the GLUT development package. Install them for example with
 
         $ sudo apt-get install git freeglut3-dev
 
