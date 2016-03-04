@@ -36,6 +36,7 @@ import "C"
 import (
 	"unsafe"
 	"os"
+	"strings"
 )
 
 
@@ -320,11 +321,27 @@ var (
 func Init() {
 	argc := C.int(len(os.Args))
 	argv := make([]*C.char, argc)
+	argv_o := make([]*C.char, argc)
+
 	for i, arg := range os.Args {
 		argv[i] = C.CString(arg)
 	}
+	copy(argv_o, argv)
+
 	defer func() {
-		for _, arg := range argv {
+		if argc < len(os.Args) {
+			for i, j := 0, 0; i < argc; i++ {
+				argv_c := C.GoString(argv[i])
+
+				for string.Compare(os.Args[j], argv_c) != 0 {
+					j = j + 1
+				}
+				os.Args[i] = os.Args[j]
+				j = j + 1
+			}
+			os.Args = os.Args[:argc]
+		}
+		for _, arg := range argv_o {
 			C.free(unsafe.Pointer(arg))
 		}
 	}()
