@@ -34,11 +34,9 @@ For more information, please refer to <http://unlicense.org>
 ## Development
 Programming language Go is used.
 
-There is a branch for the programming language Chapel. To check it out use
-
-	$ git checkout chapel
-
 The reference for the GLUT version 3 functions is taken from <https://www.opengl.org/resources/libraries/glut/glut-3.spec.pdf>. The reference for the GLUT version 3.7 functions is taken from source code available on <https://www.opengl.org/resources/libraries/glut/glut_downloads.php>.
+
+The binding for the programming language Chapel is on branch "chapel".
 
 ## Installation
 
