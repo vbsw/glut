@@ -41,7 +41,9 @@ The binding for the programming language Chapel is on branch "chapel".
 ## Installation
 
 ### Linux
-Install the programming language Go as described here <https://golang.org/doc/install>. You also need Git, the C standard library development package and the GLUT development package. Install them for example with
+Install the programming language [Go](https://golang.org/doc/install) and
+the source code management system [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+You also need the C standard library development package and the GLUT development package. Install them for example with
 
         $ sudo apt-get install git libc6-dev freeglut3-dev
 
