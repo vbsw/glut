@@ -66,7 +66,7 @@ Get this project with (run this preferably from the Git Bash)
 
 	$ go get github.com/vitalibaumtrok/glut
 
-To update the package run (if needed)
+or update your local copy with
 
 	$ go get -u github.com/vitalibaumtrok/glut
 
