@@ -51,11 +51,11 @@ Get this project with
 
 	$ go get github.com/vitalibaumtrok/glut
 
-To update the package run (if needed)
+or update your local copy with
 
 	$ go get -u github.com/vitalibaumtrok/glut
 
-Compile it with
+or compile it with
 
 	$ go install github.com/vitalibaumtrok/glut
 
