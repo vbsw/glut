@@ -329,11 +329,11 @@ func Init() {
 	copy(argv_o, argv)
 
 	defer func() {
-		if argc < len(os.Args) {
-			for i, j := 0, 0; i < argc; i++ {
+		if int(argc) < len(os.Args) {
+			for i, j := 0, 0; i < int(argc); i++ {
 				argv_c := C.GoString(argv[i])
 
-				for string.Compare(os.Args[j], argv_c) != 0 {
+				for strings.Compare(os.Args[j], argv_c) != 0 {
 					j = j + 1
 				}
 				os.Args[i] = os.Args[j]
