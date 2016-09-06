@@ -31,24 +31,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <http://unlicense.org>
 
-## Development
-Programming language Go is used.
-
-The reference for the GLUT version 3 functions is taken from <https://www.opengl.org/resources/libraries/glut/glut-3.spec.pdf>. The reference for the GLUT version 3.7 functions is taken from source code available on <https://www.opengl.org/resources/libraries/glut/glut_downloads.php>.
-
-Branches:
-
-	master
-	chapel
-
 ## Installation
 
 ### Linux
 Install the programming language [Go](https://golang.org/doc/install) and
 the source code management system [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
-You also need the C standard library development package and the GLUT development package. Install them for example with
+You also need GCC, the C standard library development package and the GLUT development package. Install them for example with
 
-        $ sudo apt-get install git libc6-dev freeglut3-dev
+        $ sudo apt-get install git gcc libc6-dev freeglut3-dev libgl1-mesa-dev
 
 Get this project with
 
@@ -63,7 +53,8 @@ or compile it with
 	$ go install github.com/vitalibaumtrok/glut
 
 ### Windows
-Install the programming language Go as described here <https://golang.org/doc/install>. Install Git.
+Install the programming language [Go](https://golang.org/doc/install).
+Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
 Get this project with (run this preferably from the Git Bash)
 
@@ -135,3 +126,9 @@ To compile run
 			}
 		}
 	}
+
+## References
+
+- <https://www.opengl.org/resources/libraries/glut/glut-3.spec.pdf>
+- <https://www.opengl.org/resources/libraries/glut/glut_downloads.php>
+
