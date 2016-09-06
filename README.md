@@ -77,7 +77,7 @@ Install the programming language [Go](https://golang.org/doc/install) and
 the source code management system [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 You also need GCC, the C standard library development package and the GLUT development package. Install them for example with
 
-        $ sudo apt-get install git gcc libc6-dev freeglut3-dev libgl1-mesa-dev
+        $ sudo apt-get install git gcc libc6-dev freeglut3-dev
 
 Get this project with
 
