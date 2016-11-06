@@ -1,8 +1,10 @@
 # GLUT
 
+[![GoDoc](https://godoc.org/github.com/vbsw/glut?status.svg)](https://godoc.org/github.com/vbsw/glut)
+
 ## Abstract
-This is GLUT (version 3.7) binding for the programming language Go,
-published at <https://github.com/vbsw/glut>.
+This is GLUT (version 3.7) binding (published at <https://github.com/vbsw/glut>)
+for the programming language Go.
 
 If you want the binding of freeglut visit <https://github.com/vbsw/freeglut>.
 
