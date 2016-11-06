@@ -1,9 +1,10 @@
 # GLUT
 
 ## Abstract
-This is GLUT (version 3.7) binding for the programming language Go.
+This is GLUT (version 3.7) binding for the programming language Go,
+published at <https://github.com/vbsw/glut>.
 
-If you want the binding of freeglut visit <https://github.com/vitalibaumtrok/freeglut>.
+If you want the binding of freeglut visit <https://github.com/vbsw/freeglut>.
 
 ## Copying
 This is free and unencumbered software released into the public domain.
@@ -36,7 +37,7 @@ For more information, please refer to <http://unlicense.org>
 	package main
 
 	import (
-		"github.com/vitalibaumtrok/glut"
+		"github.com/vbsw/glut"
 	)
 
 	func main() {
@@ -81,15 +82,15 @@ You also need GCC, the C standard library development package and the GLUT devel
 
 Get this project with
 
-	$ go get github.com/vitalibaumtrok/glut
+	$ go get github.com/vbsw/glut
 
 or update your local copy with
 
-	$ go get -u github.com/vitalibaumtrok/glut
+	$ go get -u github.com/vbsw/glut
 
 or compile it with
 
-	$ go install github.com/vitalibaumtrok/glut
+	$ go install github.com/vbsw/glut
 
 ### Windows
 Install the programming language [Go](https://golang.org/doc/install).
@@ -97,11 +98,11 @@ Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
 Get this project with (run this preferably from the Git Bash)
 
-	$ go get github.com/vitalibaumtrok/glut
+	$ go get github.com/vbsw/glut
 
 or update your local copy with
 
-	$ go get -u github.com/vitalibaumtrok/glut
+	$ go get -u github.com/vbsw/glut
 
 Cgo needs another compiler to compile c files. On a 64 bit system a 64 bit compiler is needed. I tried it with the gcc. MinGW provides only 32 bit binaries. So go to <http://tdm-gcc.tdragon.net> to download 64 bit gcc binaries. Install it.
 
@@ -109,7 +110,7 @@ Then download freeglut from <http://www.transmissionzero.co.uk/software/freeglut
 
 	C:/Users/Alice/Downloads/freeglut
 
-Then open the file github.com/vitalibaumtrok/glut/glut.go and change the first line from
+Then open the file github.com/vbsw/glut/glut.go and change the first line from
 
 	// #cgo LDFLAGS: -lGL -lGLU -lglut
 	// #include <stdlib.h>
@@ -125,7 +126,7 @@ to
 
 To compile run
 
-	$ go install github.com/vitalibaumtrok/glut
+	$ go install github.com/vbsw/glut
 
 ## References
 
