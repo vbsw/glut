@@ -28,9 +28,14 @@
 
 package glut
 
-// #cgo LDFLAGS: -lGL -lGLU -lglut
+// #cgo linux LDFLAGS: -lGL -lGLU -lglut
+// #cgo darwin LDFLAGS: -framework GLUT -framework OpenGL
 // #include <stdlib.h>
+// #ifdef __APPLE__
+// #include <GLUT/glut.h>
+// #else
 // #include <GL/glut.h>
+// #endif
 // #include "gofunctions.h"
 import "C"
 import (
