@@ -121,7 +121,8 @@ Then open the file github.com/vbsw/glut/glut.go and change the first line from
 
 to
 
-	// #cgo LDFLAGS: -IC:/Users/Alice/Downloads/freeglut/include -LC:/Users/Alice/Downloads/freeglut/bin/x64 -l:freeglut.dll
+	// #cgo CFLAGS: -IC:/Users/Alice/Downloads/freeglut/include
+	// #cgo LDFLAGS: -LC:/Users/Alice/Downloads/freeglut/bin/x64 -l:freeglut.dll
 	// #include <stdlib.h>
 	// #include <GL/glut.h>
 	// #include "gofunctions.h"
